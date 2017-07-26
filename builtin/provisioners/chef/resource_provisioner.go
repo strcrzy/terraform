@@ -86,6 +86,7 @@ type provisionFn func(terraform.UIOutput, communicator.Communicator) error
 
 type provisioner struct {
 	Attributes            map[string]interface{}
+	ChefInstallURL        string
 	ClientOptions         []string
 	DisableReporting      bool
 	Environment           string
@@ -148,6 +149,11 @@ func Provisioner() terraform.ResourceProvisioner {
 			"attributes_json": &schema.Schema{
 				Type:     schema.TypeString,
 				Optional: true,
+			},
+			"chef_install_url": &schema.Schema{
+				Type:     schema.TypeString,
+				Optional: true,
+				Default:  "https://www.chef.io/chef/install.sh"
 			},
 			"client_options": &schema.Schema{
 				Type:     schema.TypeList,
